@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Pupil;
 use App\Models\SchoolClass;
+use App\Models\Club;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,19 @@ class DatabaseSeeder extends Seeder
             ->count(17)
             ->recycle($classes)
             ->create();
+
+        $clubs = collect([
+            'Робототехника',
+            'Шахматы',
+            'Футбол',
+            'Рисование',
+            'Программирование',
+        ]);
+
+        foreach ($clubs as $clubName) {
+            Club::firstOrCreate([
+                'name' => $clubName,
+            ]);
+        }
     }
 }

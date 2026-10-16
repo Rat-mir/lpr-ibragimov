@@ -1,3 +1,12 @@
+commit 2760df53ac873fe937e01200d6cc60e26236ebed
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-16 21:22:15 +0500
+
+    ЛПР9 п.6: CRUD
+
+ git-log-lpr9.txt | 170 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 170 insertions(+)
+
 commit aa765346d185a06e5bcfb3315940bb044ba60b31
 Author: Rat-mir <ratya3001@gmail.com>
 Date:   2026-10-16 21:18:34 +0500

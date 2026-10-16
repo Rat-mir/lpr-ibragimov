@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Pupil extends Model
 {
@@ -32,4 +33,11 @@ class Pupil extends Model
     {
         return $this->belongsTo(SchoolClass::class);
     }
+
+    public function clubs(): BelongsToMany
+{
+    return $this->belongsToMany(
+        Club::class
+    );
+}
 }

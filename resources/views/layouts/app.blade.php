@@ -47,13 +47,15 @@
                href="{{ route('feedback.form') }}">
                 Обратная связь
             </a>
-            <a
-        class="nav-link"
-        href="{{ route('pupils.index') }}"
->
-        CRUD учеников
+            <a class="nav-link"
+                href="{{ route('pupils.index') }}">
+                CRUD учеников
             </a>
 
+            <a class="nav-link"
+                href="{{ route('school-classes.index') }}">
+                Классы
+            </a>
         </div>
     </div>
 </nav>

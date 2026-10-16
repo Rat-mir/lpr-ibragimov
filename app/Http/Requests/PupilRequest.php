@@ -56,7 +56,17 @@ class PupilRequest extends FormRequest
             'has_benefit' => [
                 'boolean',
             ],
+            'clubs' => [
+            'nullable',
+            'array',
+            ],
+
+            'clubs.*' => [
+            'integer',
+            'exists:clubs,id',
+            ],
         ];
+        
     }
 
     public function messages(): array

@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="d-flex justify-content-between mb-3">
-
     <h1>{{ $title }}</h1>
 
     <a
@@ -12,36 +11,89 @@
     >
         + Добавить ученика
     </a>
-
 </div>
 
 <form method="GET" class="row g-2 mb-3">
 
-    <div class="col-md-4">
-
+    <div class="col-md-3">
         <input
+            type="text"
             name="q"
             value="{{ request('q') }}"
             class="form-control"
             placeholder="Поиск по ФИО"
         >
+    </div>
 
+    <div class="col-md-3">
+        <select
+            name="school_class_id"
+            class="form-select"
+        >
+            <option value="">
+                Все классы
+            </option>
+
+            @foreach ($classes as $class)
+                <option
+                    value="{{ $class->id }}"
+                    @selected(
+                        request('school_class_id') == $class->id
+                    )
+                >
+                    {{ $class->name }}
+                </option>
+            @endforeach
+
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select
+            name="has_benefit"
+            class="form-select"
+        >
+            <option value="">
+                Любая льгота
+            </option>
+
+            <option
+                value="1"
+                @selected(request('has_benefit') === '1')
+            >
+                Есть льгота
+            </option>
+
+            <option
+                value="0"
+                @selected(request('has_benefit') === '0')
+            >
+                Нет льготы
+            </option>
+        </select>
     </div>
 
     <div class="col-auto">
-
-        <button class="btn btn-secondary">
-            Найти
+        <button class="btn btn-primary">
+            Применить
         </button>
+    </div>
 
+    <div class="col-auto">
+        <a
+            href="{{ route('pupils.index') }}"
+            class="btn btn-secondary"
+        >
+            Сбросить
+        </a>
     </div>
 
 </form>
 
+
 <table class="table table-striped align-middle">
 
     <thead>
-
         <tr>
             <th>ID</th>
             <th>ФИО</th>
@@ -49,9 +101,9 @@
             <th>Дата рождения</th>
             <th>Средний балл</th>
             <th>Льгота</th>
+            <th>Кружки</th>
             <th></th>
         </tr>
-
     </thead>
 
     <tbody>
@@ -98,6 +150,27 @@
 
                 </td>
 
+
+                {{-- Кружки --}}
+                <td>
+
+                    @forelse ($pupil->clubs as $club)
+
+                        <span class="badge bg-info text-dark">
+                            {{ $club->name }}
+                        </span>
+
+                    @empty
+
+                        <span class="text-muted">
+                            Нет
+                        </span>
+
+                    @endforelse
+
+                </td>
+
+
                 <td class="text-end">
 
                     <a
@@ -134,6 +207,7 @@
     </tbody>
 
 </table>
+
 
 {{ $pupils->links() }}
 

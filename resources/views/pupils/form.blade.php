@@ -202,7 +202,67 @@
 
     </div>
 
+<hr>
 
+<h5>
+    Кружки
+</h5>
+
+@php
+
+    $selectedClubs = old(
+        'clubs',
+        $pupil->exists
+            ? $pupil->clubs->pluck('id')->toArray()
+            : []
+    );
+
+@endphp
+
+<div class="row mb-3">
+
+    @foreach ($clubs as $club)
+
+        <div class="col-md-4">
+
+            <div class="form-check">
+
+                <input
+                    type="checkbox"
+                    name="clubs[]"
+                    value="{{ $club->id }}"
+                    class="form-check-input"
+                    id="club{{ $club->id }}"
+                    @checked(
+                        in_array(
+                            $club->id,
+                            $selectedClubs
+                        )
+                    )
+                >
+
+                <label
+                    class="form-check-label"
+                    for="club{{ $club->id }}"
+                >
+                    {{ $club->name }}
+                </label>
+
+            </div>
+
+        </div>
+
+    @endforeach
+
+</div>
+
+@error('clubs.*')
+
+    <div class="text-danger mb-3">
+        {{ $message }}
+    </div>
+
+@enderror
     <button class="btn btn-primary">
         Сохранить
     </button>

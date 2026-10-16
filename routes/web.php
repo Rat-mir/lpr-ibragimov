@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\PupilController;
 
 Route::get('/hello/{name?}', function (string $name = 'гость') {
@@ -41,6 +41,15 @@ Route::prefix('catalog')
 
     Route::resource('pupils', PupilController::class)
     ->except(['show']);
+    Route::get(
+    '/school-classes',
+    [SchoolClassController::class, 'index']
+)->name('school-classes.index');
+
+Route::delete(
+    '/school-classes/{schoolClass}',
+    [SchoolClassController::class, 'destroy']
+)->name('school-classes.destroy');
 
 Route::get(
     '/feedback',
