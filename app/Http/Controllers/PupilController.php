@@ -2,83 +2,104 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PupilRequest;
 use App\Models\Pupil;
-use Illuminate\Http\Request;
 use App\Models\SchoolClass;
-
+use Illuminate\Http\Request;
 
 class PupilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
-{
-    $query = Pupil::with('schoolClass');
+    {
+        $query = Pupil::with('schoolClass');
 
-    if ($search = $request->query('q')) {
-        $query->where(
-            'full_name',
-            'like',
-            "%{$search}%"
-        );
+        if ($search = $request->query('q')) {
+
+            $query->where(
+                'full_name',
+                'like',
+                "%{$search}%"
+            );
+        }
+
+        $query->orderBy('full_name');
+
+        return view('pupils.index', [
+            'title' => 'Ученики',
+
+            'pupils' => $query
+                ->paginate(4)
+                ->withQueryString(),
+        ]);
     }
 
-    $query->orderBy('full_name');
-
-    return view('pupils.index', [
-        'title' => 'Ученики',
-        'pupils' => $query
-            ->paginate(4)
-            ->withQueryString(),
-    ]);
-}
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('pupils.form', [
+
+            'title' => 'Новый ученик',
+
+            'pupil' => new Pupil(),
+
+            'classes' => SchoolClass::orderBy('name')
+                ->get(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(PupilRequest $request)
     {
-        //
+        $pupil = Pupil::create(
+            $request->validated()
+        );
+
+        return redirect()
+            ->route('pupils.index')
+            ->with(
+                'status',
+                "Добавлен ученик: {$pupil->full_name}"
+            );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pupil $pupil)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Pupil $pupil)
     {
-        //
+        return view('pupils.form', [
+
+            'title' => 'Редактирование ученика',
+
+            'pupil' => $pupil,
+
+            'classes' => SchoolClass::orderBy('name')
+                ->get(),
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pupil $pupil)
-    {
-        //
+    public function update(
+        PupilRequest $request,
+        Pupil $pupil
+    ) {
+        $pupil->update(
+            $request->validated()
+        );
+
+        return redirect()
+            ->route('pupils.index')
+            ->with(
+                'status',
+                'Изменения сохранены.'
+            );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Pupil $pupil)
     {
-        //
+        $name = $pupil->full_name;
+
+        $pupil->delete();
+
+        return redirect()
+            ->route('pupils.index')
+            ->with(
+                'status',
+                "Удалено: {$name}"
+            );
     }
 }
