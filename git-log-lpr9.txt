@@ -1,0 +1,170 @@
+commit aa765346d185a06e5bcfb3315940bb044ba60b31
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-16 21:18:34 +0500
+
+    ЛПР9 п.5: формы и валидация
+
+ app/Http/Controllers/PupilController.php | 127 ++++++++++--------
+ app/Http/Requests/PupilRequest.php       | 110 ++++++++++++++++
+ resources/views/pupils/form.blade.php    | 219 +++++++++++++++++++++++++++++++
+ 3 files changed, 403 insertions(+), 53 deletions(-)
+
+commit 99f18d5ba58c87b61672e14569cd8d5880846ba5
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-16 21:14:43 +0500
+
+    ЛПР9 п.4: список
+
+ app/Http/Controllers/PupilController.php |  84 +++++++++++++++++++
+ app/Providers/AppServiceProvider.php     |   8 +-
+ resources/views/layouts/app.blade.php    |   6 ++
+ resources/views/pupils/index.blade.php   | 140 +++++++++++++++++++++++++++++++
+ routes/web.php                           |   5 ++
+ 5 files changed, 240 insertions(+), 3 deletions(-)
+
+commit 9266e0ee4e7699628a77d59beca2bc22524aead4
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-16 21:03:22 +0500
+
+    ЛПР9 п.3: изменение таблицы, фабрики, сидер
+
+ database/factories/PupilFactory.php                | 29 +++++++++++++--------
+ database/factories/SchoolClassFactory.php          | 30 ++++++++++++++--------
+ ...020_change_full_name_length_in_pupils_table.php | 28 ++++++++++++++++++++
+ database/seeders/DatabaseSeeder.php                | 23 ++++++++---------
+ 4 files changed, 75 insertions(+), 35 deletions(-)
+
+commit 18831f77c5ddf65a08b13f8c9d2eb227008ffb38
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-16 21:00:05 +0500
+
+    ЛПР9 п.2: миграции и модели
+
+ .env.example                                       |  28 +++--
+ app/Models/Pupil.php                               |  35 ++++++
+ app/Models/SchoolClass.php                         |  22 ++++
+ database/factories/PupilFactory.php                |  24 +++++
+ database/factories/SchoolClassFactory.php          |  24 +++++
+ ...26_10_16_155300_create_school_classes_table.php |  29 +++++
+ .../2026_10_16_155306_create_pupils_table.php      |  44 ++++++++
+ git-log-lpr8.txt                                   | 118 +++++++++++++++++++++
+ 8 files changed, 313 insertions(+), 11 deletions(-)
+
+commit c615ab6b5c82d99cf985a1255bb2c254a86dd039
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:44:05 +0500
+
+    ЛПР8 п.6: POST-форма
+
+ resources/views/feedback.blade.php | 51 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
+
+commit 7c2be0f9e82c4cf972ee3da34c81a974f1930118
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:39:37 +0500
+
+    ЛПР8 п.5: Blade-шаблоны
+
+ resources/views/catalog/index.blade.php   | 153 ++++++++++++++++++++++++++++++
+ resources/views/catalog/parents.blade.php |  31 ++++++
+ resources/views/catalog/show.blade.php    |  83 ++++++++++++++++
+ resources/views/catalog/stats.blade.php   |  65 +++++++++++++
+ resources/views/errors/404.blade.php      |  31 ++++++
+ resources/views/layouts/app.blade.php     |  86 +++++++++++++++++
+ 6 files changed, 449 insertions(+)
+
+commit df8b1e2a1c9821ea16994ab85b0cd4e88c90033b
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:33:29 +0500
+
+    ЛПР8 п.4: контроллер каталога
+
+ app/Http/Controllers/CatalogController.php | 184 +++++++++++++++++++++++++++++
+ app/Http/Controllers/PageController.php    |  28 +++++
+ routes/web.php                             |  43 ++++++-
+ 3 files changed, 254 insertions(+), 1 deletion(-)
+
+commit c0ca01338eda7a4a37bd7dcc28ec91aeb458851c
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:31:24 +0500
+
+    ЛПР8 п.3: маршрут с параметром
+
+ routes/web.php | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 40fea0ac67f06e465265e00262aa8b174e3fb4c6
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:24:47 +0500
+
+    ЛПР8 п.2: настройки .env и config/lab.php
+
+ config/lab.php | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit b3d40cf5ff4cea1047d450b9523912ea619d9b97
+Author: Rat-mir <ratya3001@gmail.com>
+Date:   2026-10-15 23:20:56 +0500
+
+    ЛПР8 п.1: установка Laravel
+
+ .editorconfig                                      |   18 +
+ .env.example                                       |   65 +
+ .gitattributes                                     |   11 +
+ .gitignore                                         |   27 +
+ .npmrc                                             |    2 +
+ AGENTS.md                                          |   47 +
+ CLAUDE.md                                          |   47 +
+ README.md                                          |   58 +
+ app/Http/Controllers/Controller.php                |    8 +
+ app/Models/User.php                                |   32 +
+ app/Providers/AppServiceProvider.php               |   24 +
+ artisan                                            |   18 +
+ bootstrap/app.php                                  |   21 +
+ bootstrap/cache/.gitignore                         |    2 +
+ bootstrap/providers.php                            |    7 +
+ composer.json                                      |   86 +
+ composer.lock                                      | 8381 ++++++++++++++++++++
+ config/app.php                                     |  126 +
+ config/auth.php                                    |  117 +
+ config/cache.php                                   |  136 +
+ config/database.php                                |  184 +
+ config/filesystems.php                             |   80 +
+ config/logging.php                                 |  140 +
+ config/mail.php                                    |  118 +
+ config/queue.php                                   |  129 +
+ config/services.php                                |   38 +
+ config/session.php                                 |  233 +
+ database/.gitignore                                |    1 +
+ database/factories/UserFactory.php                 |   45 +
+ .../0001_01_01_000000_create_users_table.php       |   49 +
+ .../0001_01_01_000001_create_cache_table.php       |   35 +
+ .../0001_01_01_000002_create_jobs_table.php        |   59 +
+ database/seeders/DatabaseSeeder.php                |   25 +
+ package.json                                       |   19 +
+ phpunit.xml                                        |   36 +
+ public/.htaccess                                   |   25 +
+ public/favicon.ico                                 |    0
+ public/index.php                                   |   20 +
+ public/robots.txt                                  |    2 +
+ resources/css/app.css                              |    9 +
+ resources/js/app.js                                |    1 +
+ resources/views/welcome.blade.php                  |  223 +
+ routes/console.php                                 |    8 +
+ routes/web.php                                     |    7 +
+ storage/app/.gitignore                             |    4 +
+ storage/app/private/.gitignore                     |    2 +
+ storage/app/public/.gitignore                      |    2 +
+ storage/framework/.gitignore                       |   10 +
+ storage/framework/cache/.gitignore                 |    4 +
+ storage/framework/cache/data/.gitignore            |    2 +
+ storage/framework/cache/locks/.gitignore           |    2 +
+ storage/framework/sessions/.gitignore              |    2 +
+ storage/framework/testing/.gitignore               |    2 +
+ storage/framework/views/.gitignore                 |    2 +
+ storage/logs/.gitignore                            |    2 +
+ tests/Feature/ExampleTest.php                      |   19 +
+ tests/TestCase.php                                 |   10 +
+ tests/Unit/ExampleTest.php                         |   16 +
+ vite.config.js                                     |   24 +
+ 59 files changed, 10822 insertions(+)
