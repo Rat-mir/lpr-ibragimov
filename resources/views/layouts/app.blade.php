@@ -47,6 +47,12 @@
                href="{{ route('feedback.form') }}">
                 Обратная связь
             </a>
+            <a
+        class="nav-link"
+        href="{{ route('pupils.index') }}"
+>
+        CRUD учеников
+            </a>
 
         </div>
     </div>

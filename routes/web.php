@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PupilController;
+
 Route::get('/hello/{name?}', function (string $name = 'гость') {
     return "Привет, {$name}!";
 })->where('name', '[\p{L}]+');
@@ -36,6 +38,9 @@ Route::prefix('catalog')
             ->whereNumber('id')
             ->name('show');
     });
+
+    Route::resource('pupils', PupilController::class)
+    ->except(['show']);
 
 Route::get(
     '/feedback',
