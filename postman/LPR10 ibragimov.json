@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "LPR10 ibragimov",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "",
+      "type": "default"
+    }
+  ],
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "pm.test(\"Код 201\", () => {",
+          "    pm.response.to.have.status(201);",
+          "});",
+          "",
+          "const body = pm.response.json();",
+          "",
+          "pm.test(\"Есть id и заголовок Location\", () => {",
+          "    pm.expect(body.result.id).to.be.a(\"number\");",
+          "",
+          "    pm.expect(",
+          "        pm.response.headers.get(\"Location\")",
+          "    ).to.include(",
+          "        \"/api/pupils/\" + body.result.id",
+          "    );",
+          "});",
+          "",
+          "pm.environment.set(",
+          "    \"item_id\",",
+          "    body.result.id",
+          ");"
+        ]
+      }
+    }
+  ]
+}
