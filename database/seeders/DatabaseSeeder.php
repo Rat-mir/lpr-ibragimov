@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Pupil;
 use App\Models\SchoolClass;
 use App\Models\Club;
@@ -11,6 +12,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        User::updateOrCreate(
+    ['email' => 'test@example.com'],
+        [
+        'name' => 'Test User',
+        'password' => 'password',
+        ]
+        );
         $classes = SchoolClass::factory()
             ->count(5)
             ->create();

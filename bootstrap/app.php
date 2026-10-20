@@ -15,7 +15,9 @@ return Application::configure(
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+    $middleware->api(prepend: [
+        \App\Http\Middleware\LogApiRequest::class,
+    ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
